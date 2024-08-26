@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react";
 import { BoardSquare } from "./BoardSquare";
 import { Piece } from "./Piece";
+import styled from "styled-components";
 /** Styling properties applied to the board element */
-const boardStyle = {
-  width: "100%",
-  height: "100%",
-  display: "flex",
-  flexWrap: "wrap",
-};
+const Boarddiv = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+`;
+
 /** Styling properties applied to each square element */
 const squareStyle = { width: "12.5%", height: "12.5%" };
 /**
@@ -16,7 +18,9 @@ const squareStyle = { width: "12.5%", height: "12.5%" };
  */
 export const Board = ({ game }) => {
   const [[knightX, knightY], setKnightPos] = useState(game.knightPosition);
+
   useEffect(() => game.observe(setKnightPos));
+
   function renderSquare(i) {
     const x = i % 8;
     const y = Math.floor(i / 8);
@@ -28,9 +32,12 @@ export const Board = ({ game }) => {
       </div>
     );
   }
+
   const squares = [];
+
   for (let i = 0; i < 64; i += 1) {
     squares.push(renderSquare(i));
   }
-  return <div style={boardStyle}>{squares}</div>;
+
+  return <Boarddiv>{squares}</Boarddiv>;
 };
