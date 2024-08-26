@@ -1,22 +1,25 @@
-import initialData from "./initial-data.js";
-import Column from "./column";
-import { DragDropContext } from "react-beautiful-dnd";
+import React, { useMemo } from "react";
+import styled from "styled-components";
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
+import { Game } from "./Game";
+import { Board } from "./Board";
 
-function App() {
-  const state = initialData;
+const TutorialApp = styled.div`
+  width: 500px;
+  height: 200px;
+  border: 1px solid gray;
+`;
 
-  const onDragEnd = (result) => {};
+export default function App() {
+  const game = useMemo(() => new Game(), []);
+  console.log("Load App");
 
   return (
-    <DragDropContext onDragEnd={onDragEnd}>
-      {state.columnOrder.map((columnId) => {
-        const column = state.columns[columnId];
-        const tasks = column.taskIds.map((taskId) => state.tasks[taskId]);
-
-        return <Column key={column.id} column={column} tasks={tasks} />;
-      })}
-    </DragDropContext>
+    <DndProvider backend={HTML5Backend}>
+      <TutorialApp>
+        <Board game={game} />
+      </TutorialApp>
+    </DndProvider>
   );
 }
-
-export default App;
