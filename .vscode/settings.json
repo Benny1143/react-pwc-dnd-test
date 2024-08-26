@@ -8,6 +8,5 @@
   },
   "[jsonc]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "dev.containers.defaultExtensions": ["esbenp.prettier-vscode"]
+  }
 }
