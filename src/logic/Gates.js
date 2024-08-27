@@ -1,9 +1,17 @@
 import GateModel from "../models/GateModel.js";
 
 export class Gates {
-  gateSlots = new Array(10).fill([]).map((b) => new Array(10).fill("")); // 10 by 10 grid
+  gateSlots = [];
   observers = [];
   draggingGate = new GateModel(null, null, null);
+
+  constructor(qubits = 10, column = 20) {
+    this.qubits = qubits;
+    this.column = column;
+    this.gateSlots = new Array(this.qubits)
+      .fill([])
+      .map((_) => new Array(this.column).fill(""));
+  }
 
   setDraggingGate(gate) {
     this.draggingGate = gate;
